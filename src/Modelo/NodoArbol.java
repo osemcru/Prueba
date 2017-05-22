@@ -11,7 +11,7 @@ package Modelo;
  */
 public class NodoArbol {
     
-    private Object valor;
+    private Usuario valor;
     private NodoArbol izq, der;
 
     public void NodoArbol() {
@@ -20,11 +20,11 @@ public class NodoArbol {
         this.der = null;
     }
 
-    public Object getValor() {
+    public Usuario getValor() {
         return valor;
     }
 
-    public void setValor(Object valor) {
+    public void setValor(Usuario valor) {
         this.valor = valor;
     }
 
