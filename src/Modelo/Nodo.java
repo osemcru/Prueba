@@ -14,9 +14,9 @@ public class Nodo {
     private Object valor;
     private Nodo siguiente;
 
-    public Nodo(Object valor, Nodo siguiente) {
-        this.valor = valor;
-        this.siguiente = siguiente;
+    public void Nodo() {
+        this.valor = null;
+        this.siguiente = null;
     }
 
     public Object getValor() {
