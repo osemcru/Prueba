@@ -40,7 +40,6 @@ public class FrmLector extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,8 +53,6 @@ public class FrmLector extends javax.swing.JFrame {
         lblUsuario.setText("jLabel1");
 
         jButton1.setText("Cerrar Sesion");
-
-        jLabel1.setText("Hola");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,9 +70,7 @@ public class FrmLector extends javax.swing.JFrame {
                                 .addComponent(lblUsuario)))
                         .addGap(0, 36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(38, 270, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -87,9 +82,7 @@ public class FrmLector extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jLabel1))
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -141,7 +134,6 @@ public class FrmLector extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblUsuario;
     // End of variables declaration//GEN-END:variables
 }
