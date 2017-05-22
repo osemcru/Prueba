@@ -73,7 +73,7 @@ public class Pila {
     public boolean buscar(Object valor){
         
         if(esVacia()){
-            System.out.println("No hay datos en la pila");
+            return false;
         }else{
             Nodo aux = tope;
             
