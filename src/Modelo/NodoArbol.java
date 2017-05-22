@@ -14,10 +14,10 @@ public class NodoArbol {
     private Object valor;
     private NodoArbol izq, der;
 
-    public NodoArbol(Object valor, NodoArbol izq, NodoArbol der) {
-        this.valor = valor;
-        this.izq = izq;
-        this.der = der;
+    public void NodoArbol() {
+        this.valor = null;
+        this.izq = null;
+        this.der = null;
     }
 
     public Object getValor() {

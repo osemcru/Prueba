@@ -6,10 +6,13 @@
 
 package Controlador;
 
+import Modelo.NodoArbol;
+
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class ArbolBinario {
 
+    
 }
