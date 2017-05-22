@@ -427,46 +427,27 @@ public class FrmConsultaMaterialBibliografico extends javax.swing.JFrame {
     private void btnBuscarMaterialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarMaterialActionPerformed
         // TODO add your handling code here:
 
-        String titulo = (txtTitulo.getText().length()!=0) ? txtTitulo.getText() : "";
-        int isbnIssn = (txtIbnIssn.getText().length() != 0) ? Integer.parseInt(txtIbnIssn.getText()) : 0;
-        String asignatura = (txtAsignatura.getText().length() != 0) ? txtAsignatura.getText() : "";
-        int año = (txtAño.getText().length() != 0) ? Integer.parseInt(txtAño.getText()) : 0;
-        int copias = (txtCopias.getText().length() != 0) ? Integer.parseInt(txtCopias.getText()) : 0;
+        String titulo = (!txtTitulo.getText().isEmpty()) ? txtTitulo.getText() : "";
+        int isbnIssn = (!txtIbnIssn.getText().isEmpty()) ? Integer.parseInt(txtIbnIssn.getText()) : 0;
+        String asignatura = (!txtAsignatura.getText().isEmpty()) ? txtAsignatura.getText() : "";
+        int año = (!txtAño.getText().isEmpty()) ? Integer.parseInt(txtAño.getText()) : 0;
+        int copias = (!txtCopias.getText().isEmpty()) ? Integer.parseInt(txtCopias.getText()) : 0;
 
-        ArrayList<Libro> libro = controlador.buscarLibro2(titulo, isbnIssn, asignatura, año, copias);
-        ArrayList<Revista> revista = controlador2.buscarRevista2(titulo, isbnIssn, asignatura, año, copias);
+        DefaultTableModel modelo, modelo2;
+        modelo = controlador.listarConsulta(titulo, isbnIssn, asignatura, año, copias);
+        modelo2 = controlador2.listarConsulta(titulo, isbnIssn, asignatura, año, copias);
 
-        if (libro != null && revista != null) {
-            DefaultTableModel modelo;
-            modelo = controlador.buscarListarLb(libro);
-            tblMaterialLibro.setModel(modelo);
-
-            DefaultTableModel modelo2;
-            modelo2 = controlador2.buscarListarRv(revista);
-            tblMaterialRevista.setModel(modelo2);
-            btnSolicitarPrestamo.setEnabled(true);
-            btnCancelar.setVisible(true);
-
-        } else if (libro != null) {
-
-            DefaultTableModel modelo;
-            modelo = controlador.buscarListarLb(libro);
-            tblMaterialLibro.setModel(modelo);
-            btnSolicitarPrestamo.setEnabled(true);
-            btnCancelar.setVisible(true);
-
-        } else if (revista != null) {
-
-            DefaultTableModel modelo2;
-            modelo2 = controlador2.buscarListarRv(revista);
-            tblMaterialRevista.setModel(modelo2);
-            btnSolicitarPrestamo.setEnabled(true);
-            btnCancelar.setVisible(true);
-
+        if (titulo.equals("") && isbnIssn == 0 && asignatura.equals("") && año == 0 && copias == 0) {
+            JOptionPane.showMessageDialog(this, "Escribe algun valor en los cuadros de filtros");
+        } else if (modelo.getRowCount()==0 && modelo2.getRowCount()==0) {
+            JOptionPane.showMessageDialog(this, "No se encontraron datos");
         } else {
-            JOptionPane.showMessageDialog(null, "No se ha podido encontrar el material");
-        }
+            tblMaterialLibro.setModel(controlador.listarConsulta(titulo, isbnIssn, asignatura, año, copias));
+            tblMaterialRevista.setModel(controlador2.listarConsulta(titulo, isbnIssn, asignatura, año, copias));
 
+            btnSolicitarPrestamo.setEnabled(true);
+            btnCancelar.setVisible(true);
+        }
     }//GEN-LAST:event_btnBuscarMaterialActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed

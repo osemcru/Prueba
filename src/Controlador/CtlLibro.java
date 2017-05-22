@@ -20,11 +20,9 @@ import javax.swing.table.DefaultTableModel;
 public class CtlLibro {
 
     public ArrayList<Libro> listaLibros;
-    public ArrayList<Libro> consultaListaLibros;
 
     public CtlLibro() {
         listaLibros = new ArrayList<>();
-        consultaListaLibros = new ArrayList<>();
         cargarArchivoLb();
 
     }
@@ -86,22 +84,31 @@ public class CtlLibro {
         return null;
     }
 
-    public ArrayList<Libro> buscarLibro2(String titulo, int isbnIssn, String asignatura, int año, int copias) {
-        consultaListaLibros.clear();
+    public DefaultTableModel listarConsulta(String titulo, int isbnIssn, String asignatura, int año, int copias) {
+        DefaultTableModel modelo;
+        String nombreColumnas[] = {"ISBN", "Titulo", "Asignatura", "Año", "No°Copias", "No°Paginas"};
+        modelo = new DefaultTableModel(new Object[][]{}, nombreColumnas);
         int intIndex;
         for (int i = 0; i < listaLibros.size(); i++) {
             intIndex = listaLibros.get(i).getTitulo().indexOf(titulo);
-            if ((listaLibros.get(i).getTitulo().equals(titulo) || intIndex >= 0) || titulo.equals("")) {
+            if ((listaLibros.get(i).getTitulo().equalsIgnoreCase(titulo) || intIndex >= 0) || titulo.equals("")) {
 
                 if (listaLibros.get(i).getIsbnoIssn() == isbnIssn || isbnIssn == 0) {
                     intIndex = listaLibros.get(i).getAsignatura().indexOf(asignatura);
-                    if ((listaLibros.get(i).getAsignatura().equals(asignatura) || intIndex >= 0) || asignatura.equals("")) {
+                    if ((listaLibros.get(i).getAsignatura().equalsIgnoreCase(asignatura) || intIndex >= 0) || asignatura.equals("")) {
 
                         if (listaLibros.get(i).getAño() == año || año == 0) {
 
                             if (listaLibros.get(i).getNumCopias() == copias || copias == 0) {
 
-                                consultaListaLibros.add(listaLibros.get(i));
+                                modelo.addRow(new Object[]{
+                                    listaLibros.get(i).getIsbnoIssn(),
+                                    listaLibros.get(i).getTitulo(),
+                                    listaLibros.get(i).getAsignatura(),
+                                    listaLibros.get(i).getAño(),
+                                    listaLibros.get(i).getNumCopias(),
+                                    listaLibros.get(i).getNumeroPaginas()
+                                });
 
                             }
                         }
@@ -109,7 +116,8 @@ public class CtlLibro {
                 }
             }
         }
-        return consultaListaLibros;
+
+        return modelo;
     }
 
     public boolean eliminarLibro(int isbn) {
@@ -201,7 +209,7 @@ public class CtlLibro {
     }
 
     public Libro buscarLibroSeleccionado(int pos) {
-        return consultaListaLibros.get(pos);
+        return listaLibros.get(pos);
     }
 
     public boolean verificarLibro(int isbn) {

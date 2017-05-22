@@ -20,11 +20,9 @@ import javax.swing.table.DefaultTableModel;
 public class CtlRevista {
 
     public ArrayList<Revista> listaRevistas;
-    public ArrayList<Revista> consultaListaRevistas;
 
     public CtlRevista() {
         listaRevistas = new ArrayList<>();
-        consultaListaRevistas = new ArrayList<>();
         cargarArchivoRv();
 
     }
@@ -85,22 +83,32 @@ public class CtlRevista {
         return null;
     }
 
-    public ArrayList<Revista> buscarRevista2(String titulo, int isbnIssn, String asignatura, int año, int copias) {
-        consultaListaRevistas.clear();
+    public DefaultTableModel listarConsulta(String titulo, int isbnIssn, String asignatura, int año, int copias) {
+        DefaultTableModel modelo;
+        String nombreColumnas[] = {"ISSN", "Titulo", "Asignatura", "Año", "No°Copias", "Volumen"};
+        modelo = new DefaultTableModel(new Object[][]{}, nombreColumnas);
+
         int intIndex;
         for (int i = 0; i < listaRevistas.size(); i++) {
             intIndex = listaRevistas.get(i).getTitulo().indexOf(titulo);
-            if ((listaRevistas.get(i).getTitulo().equals(titulo) || intIndex >= 0) || titulo.equals("")) {
+            if ((listaRevistas.get(i).getTitulo().equals(("?i")+titulo) || intIndex >= 0) || titulo.equals("")) {
 
                 if (listaRevistas.get(i).getIsbnoIssn() == isbnIssn || isbnIssn == 0) {
                     intIndex = listaRevistas.get(i).getAsignatura().indexOf(asignatura);
-                    if ((listaRevistas.get(i).getAsignatura().equals(asignatura) || intIndex >= 0) || asignatura.equals("")) {
+                    if ((listaRevistas.get(i).getAsignatura().equalsIgnoreCase(asignatura) || intIndex >= 0) || asignatura.equals("")) {
 
                         if (listaRevistas.get(i).getAño() == año || año == 0) {
 
                             if (listaRevistas.get(i).getNumCopias() == copias || copias == 0) {
 
-                                consultaListaRevistas.add(listaRevistas.get(i));
+                                modelo.addRow(new Object[]{
+                                    listaRevistas.get(i).getIsbnoIssn(),
+                                    listaRevistas.get(i).getTitulo(),
+                                    listaRevistas.get(i).getAsignatura(),
+                                    listaRevistas.get(i).getAño(),
+                                    listaRevistas.get(i).getNumCopias(),
+                                    listaRevistas.get(i).getVolumen()
+                                });
 
                             }
                         }
@@ -108,7 +116,7 @@ public class CtlRevista {
                 }
             }
         }
-        return consultaListaRevistas;
+        return modelo;
     }
 
     public boolean eliminarRevista(int issn) {
@@ -198,7 +206,7 @@ public class CtlRevista {
     }
 
     public Revista buscarRevistaSeleccionada(int pos) {
-        return consultaListaRevistas.get(pos);
+        return listaRevistas.get(pos);
     }
 
     public boolean verificarRevista(int issn) {
