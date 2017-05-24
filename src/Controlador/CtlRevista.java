@@ -93,7 +93,7 @@ public class CtlRevista {
         int intIndex;
         for (int i = 0; i < listaRevistas.size(); i++) {
             intIndex = listaRevistas.get(i).getTitulo().indexOf(titulo);
-            if ((listaRevistas.get(i).getTitulo().equals(("?i")+titulo) || intIndex >= 0) || titulo.equals("")) {
+            if ((listaRevistas.get(i).getTitulo().equals(("?i") + titulo) || intIndex >= 0) || titulo.equals("")) {
 
                 if (listaRevistas.get(i).getIsbnoIssn() == isbnIssn || isbnIssn == 0) {
                     intIndex = listaRevistas.get(i).getAsignatura().indexOf(asignatura);
@@ -157,55 +157,27 @@ public class CtlRevista {
         }
     }
 
-    public String guardarArchivoRv() {
-        FileOutputStream archivoRv;
+    public void guardarArchivoRv() {
 
         try {
-            archivoRv = new FileOutputStream("ListaRevistas.txt");
-        } catch (Exception e) {
-            return "Error al crear el archivo";
-        }
-
-        ObjectOutputStream escrituraRv;
-
-        try {
-            escrituraRv = new ObjectOutputStream(archivoRv);
-        } catch (Exception i) {
-            return "Error con el archivo";
-        }
-
-        try {
+            FileOutputStream archivoRv = new FileOutputStream("ListaRevistas.txt");
+            ObjectOutputStream escrituraRv = new ObjectOutputStream(archivoRv);
             escrituraRv.writeObject(listaRevistas);
-            return "Se ha guardado correctamente";
-        } catch (Exception o) {
-            return "Error al almacenar el archivo";
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
-    public String cargarArchivoRv() {
-        FileInputStream archivoRv;
+    public void cargarArchivoRv() {
 
         try {
-            archivoRv = new FileInputStream("ListaRevistas.txt");
-        } catch (Exception e) {
-            return "Error cargando el archivo";
-        }
-
-        ObjectInputStream lecturaRv;
-
-        try {
-            lecturaRv = new ObjectInputStream(archivoRv);
-        } catch (Exception e) {
-            return "Error con el archivo";
-        }
-
-        try {
+            FileInputStream archivoRv = new FileInputStream("ListaRevistas.txt");
+            ObjectInputStream lecturaRv = new ObjectInputStream(archivoRv);
             listaRevistas = (ArrayList<Revista>) lecturaRv.readObject();
         } catch (Exception e) {
-            return "Error cargando la informacion";
+            e.printStackTrace();
         }
-
-        return "Archivo cargado correctamente";
     }
 
     public Revista buscarRevistaSeleccionada(int pos) {
