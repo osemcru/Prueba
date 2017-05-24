@@ -508,7 +508,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                         correoUsuario;
 
                 int codigoUsuario,
-                    cedulaUsuario;
+                        cedulaUsuario;
 
                 double salarioUsuario;
 

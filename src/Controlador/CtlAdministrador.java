@@ -25,10 +25,11 @@ import javax.swing.table.DefaultTableModel;
 public class CtlAdministrador {
 
     private ArrayList<Administrador> listaAdministradores;
-    private int indice = 0;
+    private ArbolBinario administradores;
 
     public CtlAdministrador() {
         listaAdministradores = new ArrayList<>();
+        administradores = new ArbolBinario();
         cargarArchivoA();
     }
 
@@ -39,6 +40,7 @@ public class CtlAdministrador {
      */
     public void registrarAdministrador(Administrador administrador) {
         listaAdministradores.add(administrador);
+        administradores.agregar(administrador.getCedula());
     }
 
     /**
@@ -148,6 +150,12 @@ public class CtlAdministrador {
             FileInputStream archivoAdm = new FileInputStream("ListaAdministradores.txt");
             ObjectInputStream lecturaAdm = new ObjectInputStream(archivoAdm);
             listaAdministradores = (ArrayList<Administrador>) lecturaAdm.readObject();
+
+            if (administradores.getRaiz() == null) {
+                for (int i = 0; i < listaAdministradores.size(); i++) {
+                    administradores.agregar(listaAdministradores.get(i).getCedula());
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -160,7 +168,6 @@ public class CtlAdministrador {
      * @return el administrador en la posicion de la lista
      */
     public Administrador buscarAdministradorSeleccionado(int pos) {
-        indice = pos;
         return listaAdministradores.get(pos);
     }
 
