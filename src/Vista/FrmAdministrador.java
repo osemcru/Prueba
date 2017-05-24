@@ -21,9 +21,12 @@ public class FrmAdministrador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         controlador = new CtlAdministrador();
-        administrador = controlador.cargarDatosAdmin();
-        lblUsuario.setText("Bienvenido! " + administrador.getNombreCompleto());
+        try {
+            administrador = controlador.cargarDatosAdmin();
+            lblUsuario.setText("Bienvenido! " + administrador.getNombreCompleto());
+        } catch (Exception e) {
 
+        }
     }
 
     /**
@@ -83,7 +86,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
+                        .addGap(141, 141, 141)
                         .addComponent(jButton2)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );

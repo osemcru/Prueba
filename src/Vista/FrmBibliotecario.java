@@ -24,9 +24,12 @@ public class FrmBibliotecario extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         controlador = new CtlBibliotecario();
-        bibliotecario = controlador.cargarDatosBiblio();
-        lblUsuario.setText("Bienvenido! " + bibliotecario.getNombreCompleto());
+        try {
+            bibliotecario = controlador.cargarDatosBiblio();
+            lblUsuario.setText("Bienvenido! " + bibliotecario.getNombreCompleto());
+        } catch (Exception e) {
 
+        }
     }
 
     /**

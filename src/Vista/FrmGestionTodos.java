@@ -504,23 +504,25 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario;
 
+                int codigoUsuario,
+                    cedulaUsuario;
+
                 double salarioUsuario;
+
                 Date fechaIngresoUsuario;
 
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
                 salarioUsuario = Double.parseDouble(txtSalarioAdministrador.getText());
                 fechaIngresoUsuario = jdFechaIngreso.getDate();
 
-                Administrador administrador = new Administrador(salarioUsuario, fechaIngresoUsuario, codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
+                Administrador administrador = new Administrador(salarioUsuario, fechaIngresoUsuario, nombreUsuario, direccionUsuario, correoUsuario, codigoUsuario, cedulaUsuario);
 
                 if (controlador.verificarAdministrador(administrador.getCodigo(), administrador.getCedula())
                         && controlador2.verificarBibliotecario(administrador.getCodigo(), administrador.getCedula())
@@ -551,15 +553,16 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario,
                         turnoAtencion = null;
 
+                int codigoUsuario,
+                        cedulaUsuario;
+
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
                 switch (cbTurno.getSelectedIndex()) {
@@ -574,7 +577,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                         break;
                 }
 
-                Bibliotecario bibliotecario = new Bibliotecario(turnoAtencion, codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
+                Bibliotecario bibliotecario = new Bibliotecario(turnoAtencion, nombreUsuario, turnoAtencion, correoUsuario, codigoUsuario, cedulaUsuario);
 
                 if (controlador.verificarAdministrador(bibliotecario.getCodigo(), bibliotecario.getCedula())
                         && controlador2.verificarBibliotecario(bibliotecario.getCodigo(), bibliotecario.getCedula())
@@ -603,18 +606,19 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario;
 
+                int codigoUsuario,
+                        cedulaUsuario;
+
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
 
-                Lector lector = new Lector(codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
+                Lector lector = new Lector(nombreUsuario, direccionUsuario, correoUsuario, codigoUsuario, cedulaUsuario);
 
                 if (controlador.verificarAdministrador(lector.getCodigo(), lector.getCedula())
                         && controlador2.verificarBibliotecario(lector.getCodigo(), lector.getCedula())
@@ -652,17 +656,18 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario;
+
+                int codigoUsuario,
+                        cedulaUsuario;
 
                 double salarioUsuario;
                 Date fechaIngresoUsuario;
 
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
                 salarioUsuario = Double.parseDouble(txtSalarioAdministrador.getText());
@@ -693,15 +698,16 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario,
                         turnoAtencion = null;
 
+                int codigoUsuario,
+                        cedulaUsuario;
+
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
                 switch (cbTurno.getSelectedIndex()) {
@@ -716,7 +722,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                         break;
                 }
 
-                controlador2.editarBibliotecario(codigoUsuario, cedulaUsuario, nombreUsuario, turnoAtencion, correoUsuario, turnoAtencion);
+                controlador2.editarBibliotecario(codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario, turnoAtencion);
                 JOptionPane.showMessageDialog(null, "El usuario se ha modificado ");
                 LimpiarCampos();
                 listarTablas();
@@ -740,14 +746,15 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
 
                 String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
                         direccionUsuario,
                         correoUsuario;
 
+                int codigoUsuario,
+                        cedulaUsuario;
+
                 nombreUsuario = txtNombreUsuario.getText();
-                codigoUsuario = txtCodigoUsuario.getText();
-                cedulaUsuario = txtCedulaUsuario.getText();
+                codigoUsuario = Integer.parseInt(txtCodigoUsuario.getText());
+                cedulaUsuario = Integer.parseInt(txtCedulaUsuario.getText());
                 direccionUsuario = txtDireccionUsuario.getText();
                 correoUsuario = txtCorreoUsuario.getText();
 
@@ -767,7 +774,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
         // TODO add your handling code here:
-        String cedula = JOptionPane.showInputDialog("Introduzca la cedula del usuario a eliminar");
+        int cedula = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cedula del usuario a eliminar"));
 
         if (controlador.eliminarAdministrador(cedula)) {
             JOptionPane.showMessageDialog(null, "Eliminado Correctamente el administrador",
@@ -789,7 +796,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
     private void btnBuscarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioActionPerformed
         // TODO add your handling code here:
 
-        String cedula = JOptionPane.showInputDialog("Ingrese la cedula del Usuario");
+        int cedula = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cedula del Usuario"));
         Administrador administrador = controlador.buscarAdministrador(cedula);
         Bibliotecario bibliotecario = controlador2.buscarBibliotecario(cedula);
         Lector lector = controlador3.buscarLector(cedula);
@@ -798,9 +805,9 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             cbGestionTipoUsuario.setSelectedIndex(1);
             cbGestionTipoUsuario.setEnabled(false);
             txtNombreUsuario.setText(administrador.getNombreCompleto());
-            txtCedulaUsuario.setText(administrador.getCedula());
+            txtCedulaUsuario.setText(administrador.getCedula() + "");
             txtCedulaUsuario.setEditable(false);
-            txtCodigoUsuario.setText(administrador.getCodigo());
+            txtCodigoUsuario.setText(administrador.getCodigo() + "");
             txtCorreoUsuario.setText(administrador.getCorreo());
             txtDireccionUsuario.setText(administrador.getDireccion());
             txtSalarioAdministrador.setText(String.valueOf(administrador.getSalario()));
@@ -813,9 +820,9 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             cbGestionTipoUsuario.setSelectedIndex(2);
             cbGestionTipoUsuario.setEnabled(false);
             txtNombreUsuario.setText(bibliotecario.getNombreCompleto());
-            txtCedulaUsuario.setText(bibliotecario.getCedula());
+            txtCedulaUsuario.setText(bibliotecario.getCedula() + "");
             txtCedulaUsuario.setEditable(false);
-            txtCodigoUsuario.setText(bibliotecario.getCodigo());
+            txtCodigoUsuario.setText(bibliotecario.getCodigo() + "");
             txtCorreoUsuario.setText(bibliotecario.getCorreo());
             txtDireccionUsuario.setText(bibliotecario.getDireccion());
             if (bibliotecario.getTurnoAtencion().equals("Mañana")) {
@@ -831,9 +838,9 @@ public class FrmGestionTodos extends javax.swing.JFrame {
 
         } else if (lector != null) {
             txtNombreUsuario.setText(lector.getNombreCompleto());
-            txtCedulaUsuario.setText(lector.getCedula());
+            txtCedulaUsuario.setText(lector.getCedula() + "");
             txtCedulaUsuario.setEditable(false);
-            txtCodigoUsuario.setText(lector.getCodigo());
+            txtCodigoUsuario.setText(lector.getCodigo() + "");
             txtCorreoUsuario.setText(lector.getCorreo());
             txtDireccionUsuario.setText(lector.getDireccion());
             cbGestionTipoUsuario.setSelectedIndex(3);

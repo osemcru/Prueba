@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmLogin extends javax.swing.JFrame {
 
-    private  CtlAdministrador controladorA;
+    private CtlAdministrador controladorA;
     private CtlBibliotecario controladorB;
     private CtlLector controladorL;
 
@@ -107,29 +107,32 @@ public class FrmLogin extends javax.swing.JFrame {
 
         if (!txtCodigo.getText().isEmpty() && !txtCedula.getText().isEmpty()) {
 
-            boolean sesionA = controladorA.comprobarCuentaA(txtCedula.getText(),txtCodigo.getText());
-            boolean sesionB = controladorB.comprobarCuentaB(txtCedula.getText(),txtCodigo.getText());
-            boolean sesionL = controladorL.comprobarCuentaL(txtCedula.getText(),txtCodigo.getText());
+            int codigo = Integer.parseInt(txtCodigo.getText());
+            int cedula = Integer.parseInt(txtCedula.getText());
 
-                if (sesionA) {
-                    controladorA.guardarDatosAdmin(txtCedula.getText());
-                    FrmAdministrador ventanaAdmin = new FrmAdministrador();
-                    ventanaAdmin.setVisible(true);
-                    this.dispose();
+            boolean sesionA = controladorA.comprobarCuentaA(cedula, codigo);
+            boolean sesionB = controladorB.comprobarCuentaB(cedula, codigo);
+            boolean sesionL = controladorL.comprobarCuentaL(cedula, codigo);
 
-                } else if (sesionB) {
-                    controladorB.guardarDatosBiblio(txtCedula.getText());
-                    FrmBibliotecario ventanaBibliotecario = new FrmBibliotecario();
-                    ventanaBibliotecario.setVisible(true);
-                    this.dispose();
+            if (sesionA) {
+                controladorA.guardarDatosAdmin(cedula);
+                FrmAdministrador ventanaAdmin = new FrmAdministrador();
+                ventanaAdmin.setVisible(true);
+                this.dispose();
 
-                } else if (sesionL) {
-                    controladorL.guardarDatosLector(txtCedula.getText());
-                    FrmLector ventanaLector = new FrmLector();
-                    ventanaLector.setVisible(true);
-                    this.dispose();
+            } else if (sesionB) {
+                controladorB.guardarDatosBiblio(cedula);
+                FrmBibliotecario ventanaBibliotecario = new FrmBibliotecario();
+                ventanaBibliotecario.setVisible(true);
+                this.dispose();
 
-                } else {
+            } else if (sesionL) {
+                controladorL.guardarDatosLector(cedula);
+                FrmLector ventanaLector = new FrmLector();
+                ventanaLector.setVisible(true);
+                this.dispose();
+
+            } else {
 
                 JOptionPane.showMessageDialog(null, "Cédula o codigo incorrecto");
             }

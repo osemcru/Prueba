@@ -19,13 +19,17 @@ public class FrmLector extends javax.swing.JFrame {
      */
     private CtlLector controlador;
     Lector lector;
-    
+
     public FrmLector() {
         initComponents();
         this.setLocationRelativeTo(this);
         controlador = new CtlLector();
-        lector = controlador.cargarDatosLector();
-        lblUsuario.setText("Bienvenido! " + lector.getNombreCompleto());
+        try {
+            lector = controlador.cargarDatosLector();
+            lblUsuario.setText("Bienvenido! " + lector.getNombreCompleto());
+        } catch (Exception e) {
+
+        }
     }
 
     /**
@@ -91,7 +95,7 @@ public class FrmLector extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         FrmConsultaMaterialBibliografico v = new FrmConsultaMaterialBibliografico();
         v.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

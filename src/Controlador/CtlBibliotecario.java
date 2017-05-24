@@ -69,9 +69,9 @@ public class CtlBibliotecario {
      * @param cedula, es la cedula del usuario a buscar
      * @return el bibliotecario si esta o null si no
      */
-    public Bibliotecario buscarBibliotecario(String cedula) {
+    public Bibliotecario buscarBibliotecario(int cedula) {
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (listaBibliotecarios.get(i).getCedula().equals(cedula)) {
+            if (listaBibliotecarios.get(i).getCedula() == (cedula)) {
                 return listaBibliotecarios.get(i);
             }
         }
@@ -84,11 +84,11 @@ public class CtlBibliotecario {
      * @param cedula, es la cedula del usuario a eliminar
      * @return true si lo elimina o false si no
      */
-    public boolean eliminarBibliotecario(String cedula) {
+    public boolean eliminarBibliotecario(int cedula) {
 
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
 
-            if (listaBibliotecarios.get(i).getCedula().equals(cedula)) {
+            if (listaBibliotecarios.get(i).getCedula() == (cedula)) {
 
                 listaBibliotecarios.remove(i);
                 return true;
@@ -109,9 +109,9 @@ public class CtlBibliotecario {
      * @param correo
      * @param turnoAtencion
      */
-    public void editarBibliotecario(String codigo, String cedula, String nombre, String direccion, String correo, String turnoAtencion) {
+    public void editarBibliotecario(int codigo, int cedula, String nombre, String direccion, String correo, String turnoAtencion) {
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (listaBibliotecarios.get(i).getCedula().equals(cedula)) {
+            if (listaBibliotecarios.get(i).getCedula() == (cedula)) {
                 listaBibliotecarios.get(i).setNombreCompleto(nombre);
                 listaBibliotecarios.get(i).setCodigo(codigo);
                 listaBibliotecarios.get(i).setCorreo(correo);
@@ -151,6 +151,7 @@ public class CtlBibliotecario {
 
     /**
      * busca el bibliotecario seleccionado de la tabla
+     *
      * @param pos, es la posición del bibliotecario a buscar en la lista
      * @return el bibliotecario en la posicion de la lista
      */
@@ -161,45 +162,49 @@ public class CtlBibliotecario {
 
     /**
      * comprueba si existe un bibliotecario con esa cuenta
+     *
      * @param cedula, es la cedula del usuario
      * @param codigo, es el codigo del usuario
      * @return true si esta o false si no
      */
-    public boolean comprobarCuentaB(String cedula, String codigo) {
+    public boolean comprobarCuentaB(int cedula, int codigo) {
 
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (cedula.equals(listaBibliotecarios.get(i).getCedula()) && codigo.equals(listaBibliotecarios.get(i).getCodigo())) {
+            if (cedula == (listaBibliotecarios.get(i).getCedula()) && codigo == (listaBibliotecarios.get(i).getCodigo())) {
                 return true;
-            } 
+            }
         }
         return false;
     }
 
-     /**
-     *  verifica si existe un usuario bibliotecario con tal cedula y codigo
+    /**
+     * verifica si existe un usuario bibliotecario con tal cedula y codigo
+     *
      * @param codigo, es el codigo del usuario a buscar
      * @param cedula, es la cedula del usuario a buscar
      * @return false si hay un usuario con ese codigo o cedula, true si no
      */
-    public boolean verificarBibliotecario(String codigo, String cedula) {
+    public boolean verificarBibliotecario(int codigo, int cedula) {
 
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (codigo.equals(listaBibliotecarios.get(i).getCodigo()) || cedula.equals(listaBibliotecarios.get(i).getCedula())) {
+            if (codigo == (listaBibliotecarios.get(i).getCodigo()) || cedula == (listaBibliotecarios.get(i).getCedula())) {
                 return false;
             }
         }
         return true;
     }
-    
-    public void guardarDatosBiblio(String cedula) {
+
+    public void guardarDatosBiblio(int cedula) {
         Properties propiedades = new Properties();
         OutputStream salida = null;
+
+        String guardar = cedula + "";
 
         try {
             salida = new FileOutputStream("sesion.properties");
 
             // asignamos los valores a las propiedades
-            propiedades.setProperty("cedulaBiblio", cedula);
+            propiedades.setProperty("cedulaBiblio", guardar);
 
             // guardamos el archivo de propiedades en la carpeta de aplicación
             propiedades.store(salida, null);
@@ -222,7 +227,7 @@ public class CtlBibliotecario {
         Properties propiedades = new Properties();
         InputStream entrada = null;
 
-        String cedula = null;
+        String cargar = null;
 
         try {
 
@@ -232,7 +237,7 @@ public class CtlBibliotecario {
             propiedades.load(entrada);
 
             // obtenemos las propiedades y las imprimimos
-            cedula = propiedades.getProperty("cedulaBiblio");
+            cargar = propiedades.getProperty("cedulaBiblio");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -247,8 +252,10 @@ public class CtlBibliotecario {
             }
         }
 
+        int cedula = Integer.parseInt(cargar);
+
         for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (cedula.equals(listaBibliotecarios.get(i).getCedula())) {
+            if (cedula == (listaBibliotecarios.get(i).getCedula())) {
                 return listaBibliotecarios.get(i);
             }
         }

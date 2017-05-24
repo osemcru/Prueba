@@ -11,21 +11,20 @@ import java.util.Date;
  *
  * @author Cristian Cruz
  */
-public class Administrador extends Usuario{
-    
-   private double salario;
-   private Date fechaIngreso;
+public class Administrador extends Usuario {
 
-    public Administrador(double salario, Date fechaIngreso, String codigo, String cedula, String nombreCompleto, String direccion, String correo) {
-        super(codigo, cedula, nombreCompleto, direccion, correo);
+    private double salario;
+    private Date fechaIngreso;
+
+    public Administrador(double salario, Date fechaIngreso, String nombreCompleto, String direccion, String correo, int codigo, int cedula) {
+        super(nombreCompleto, direccion, correo, codigo, cedula);
         this.salario = salario;
         this.fechaIngreso = fechaIngreso;
     }
 
-    
     public Administrador() {
-        
-    }    
+
+    }
 
     public double getSalario() {
         return salario;
@@ -42,5 +41,5 @@ public class Administrador extends Usuario{
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-       
+
 }

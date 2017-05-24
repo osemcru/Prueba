@@ -9,19 +9,17 @@ package Modelo;
  *
  * @author Cristian Cruz
  */
-public class Bibliotecario extends Usuario{
-    
+public class Bibliotecario extends Usuario {
+
     private String turnoAtencion;
 
-    public Bibliotecario(String turnoAtencion, String codigo, String cedula, String nombreCompleto, String direccion, String correo) {
-        super(codigo, cedula, nombreCompleto, direccion, correo);
+    public Bibliotecario(String turnoAtencion, String nombreCompleto, String direccion, String correo, int codigo, int cedula) {
+        super(nombreCompleto, direccion, correo, codigo, cedula);
         this.turnoAtencion = turnoAtencion;
     }
 
-   
+    public Bibliotecario() {
 
-    public Bibliotecario(){
-        
     }
 
     public String getTurnoAtencion() {
@@ -31,6 +29,5 @@ public class Bibliotecario extends Usuario{
     public void setTurnoAtencion(String turnoAtencion) {
         this.turnoAtencion = turnoAtencion;
     }
-    
-    
+
 }

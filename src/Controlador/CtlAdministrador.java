@@ -71,9 +71,9 @@ public class CtlAdministrador {
      * @param cedula, es la cedula del usuario a buscar
      * @return el administrador si esta o null si no
      */
-    public Administrador buscarAdministrador(String cedula) {
+    public Administrador buscarAdministrador(int cedula) {
         for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (listaAdministradores.get(i).getCedula().equals(cedula)) {
+            if (listaAdministradores.get(i).getCedula() == (cedula)) {
                 return listaAdministradores.get(i);
             }
         }
@@ -86,11 +86,11 @@ public class CtlAdministrador {
      * @param cedula, es la cedula del usuario a eliminar
      * @return true si lo elimina o false si no
      */
-    public boolean eliminarAdministrador(String cedula) {
+    public boolean eliminarAdministrador(int cedula) {
 
         for (int i = 0; i < listaAdministradores.size(); i++) {
 
-            if (listaAdministradores.get(i).getCedula().equals(cedula)) {
+            if (listaAdministradores.get(i).getCedula() == (cedula)) {
 
                 listaAdministradores.remove(i);
                 return true;
@@ -112,9 +112,9 @@ public class CtlAdministrador {
      * @param salario
      * @param fechaIngreso
      */
-    public void editarAdministrador(String codigo, String cedula, String nombre, String direccion, String correo, double salario, Date fechaIngreso) {
+    public void editarAdministrador(int codigo, int cedula, String nombre, String direccion, String correo, double salario, Date fechaIngreso) {
         for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (listaAdministradores.get(i).getCedula().equals(cedula)) {
+            if (listaAdministradores.get(i).getCedula() == (cedula)) {
                 listaAdministradores.get(i).setNombreCompleto(nombre);
                 listaAdministradores.get(i).setCodigo(codigo);
                 listaAdministradores.get(i).setCorreo(correo);
@@ -171,9 +171,9 @@ public class CtlAdministrador {
      * @param codigo, es el codigo del usuario
      * @return true si esta o false si no
      */
-    public boolean comprobarCuentaA(String cedula, String codigo) {
+    public boolean comprobarCuentaA(int cedula, int codigo) {
         for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (cedula.equals(listaAdministradores.get(i).getCedula()) && codigo.equals(listaAdministradores.get(i).getCodigo())) {
+            if (cedula == (listaAdministradores.get(i).getCedula()) && codigo == (listaAdministradores.get(i).getCodigo())) {
                 return true;
             }
         }
@@ -187,25 +187,26 @@ public class CtlAdministrador {
      * @param cedula, es la cedula del usuario a buscar
      * @return false si hay un usuario con ese codigo o cedula, true si no
      */
-    public boolean verificarAdministrador(String codigo, String cedula) {
+    public boolean verificarAdministrador(int codigo, int cedula) {
 
         for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (codigo.equals(listaAdministradores.get(i).getCodigo()) || cedula.equals(listaAdministradores.get(i).getCedula())) {
+            if (codigo == (listaAdministradores.get(i).getCodigo()) || cedula == (listaAdministradores.get(i).getCedula())) {
                 return false;
             }
         }
         return true;
     }
 
-    public void guardarDatosAdmin(String cedula) {
+    public void guardarDatosAdmin(int cedula) {
         Properties propiedades = new Properties();
         OutputStream salida = null;
+        String guardar = cedula + "";
 
         try {
             salida = new FileOutputStream("sesion.properties");
 
             // asignamos los valores a las propiedades
-            propiedades.setProperty("cedulaAdmin", cedula);
+            propiedades.setProperty("cedulaAdmin", guardar);
 
             // guardamos el archivo de propiedades en la carpeta de aplicación
             propiedades.store(salida, null);
@@ -228,7 +229,7 @@ public class CtlAdministrador {
         Properties propiedades = new Properties();
         InputStream entrada = null;
 
-        String cedula = null;
+        String cargar = null;
 
         try {
 
@@ -238,7 +239,7 @@ public class CtlAdministrador {
             propiedades.load(entrada);
 
             // obtenemos las propiedades y las imprimimos
-            cedula = propiedades.getProperty("cedulaAdmin");
+            cargar = propiedades.getProperty("cedulaAdmin");
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -253,8 +254,10 @@ public class CtlAdministrador {
             }
         }
 
+        int cedula = Integer.parseInt(cargar);
+
         for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (cedula.equals(listaAdministradores.get(i).getCedula())) {
+            if (cedula == (listaAdministradores.get(i).getCedula())) {
                 return listaAdministradores.get(i);
             }
         }

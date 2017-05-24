@@ -9,15 +9,14 @@ package Modelo;
  *
  * @author Cristian Cruz
  */
-public class Lector extends Usuario{
-    
+public class Lector extends Usuario {
+
     private Prestamo[] prestamos = new Prestamo[3];
 
-    public Lector(String codigo, String cedula, String nombreCompleto, String direccion, String correo) {
-        super(codigo, cedula, nombreCompleto, direccion, correo);
+    public Lector(String nombreCompleto, String direccion, String correo, int codigo, int cedula) {
+        super(nombreCompleto, direccion, correo, codigo, cedula);
     }
 
-    
     public Prestamo getPrestamos(int i) {
         return prestamos[i];
     }
@@ -25,5 +24,5 @@ public class Lector extends Usuario{
     public void setPrestamos(Prestamo[] prestamos, int i) {
         this.prestamos[i] = prestamos[i];
     }
-     
+
 }

@@ -13,35 +13,19 @@ import java.io.Serializable;
  */
 public class Usuario implements Serializable{
     
-    protected String codigo,cedula,nombreCompleto,direccion,correo;
+    protected String nombreCompleto,direccion,correo;
+    protected int codigo,cedula;
 
-    public Usuario(String codigo, String cedula, String nombreCompleto, String direccion, String correo) {
-        this.codigo = codigo;
-        this.cedula = cedula;
+    public Usuario(String nombreCompleto, String direccion, String correo, int codigo, int cedula) {
         this.nombreCompleto = nombreCompleto;
         this.direccion = direccion;
         this.correo = correo;
+        this.codigo = codigo;
+        this.cedula = cedula;
     }
 
     public Usuario() {
-    }
-    
-    
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+        
     }
 
     public String getNombreCompleto() {
@@ -68,6 +52,20 @@ public class Usuario implements Serializable{
         this.correo = correo;
     }
 
-    
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public int getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(int cedula) {
+        this.cedula = cedula;
+    }
     
 }

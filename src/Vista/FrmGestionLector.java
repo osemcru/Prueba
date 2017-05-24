@@ -24,7 +24,7 @@ public class FrmGestionLector extends javax.swing.JFrame {
     private CtlLector controlador;
     private CtlBibliotecario controlador2;
     private CtlAdministrador controlador3;
-    
+
     public FrmGestionLector() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -34,7 +34,7 @@ public class FrmGestionLector extends javax.swing.JFrame {
         controlador = new CtlLector();
         controlador2 = new CtlBibliotecario();
         controlador3 = new CtlAdministrador();
-         listarTablas();
+        listarTablas();
     }
 
     /**
@@ -245,119 +245,121 @@ public class FrmGestionLector extends javax.swing.JFrame {
         btnModificarLector.setEnabled(false);
         btnCancelarLector.setVisible(false);
         btnRegistrarLector.setEnabled(true);
-        
+
     }//GEN-LAST:event_btnCancelarLectorActionPerformed
 
     private void btnRegistrarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarLectorActionPerformed
         // TODO add your handling code here:
-        
+
         if (txtNombreLector.getText().isEmpty()
-                    || txtCodigoLector.getText().isEmpty()
-                    || txtCedulaLector.getText().isEmpty()
-                    || txtDireccionLector.getText().isEmpty()
-                    || txtCorreoLector.getText().isEmpty()) {
+                || txtCodigoLector.getText().isEmpty()
+                || txtCedulaLector.getText().isEmpty()
+                || txtDireccionLector.getText().isEmpty()
+                || txtCorreoLector.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+            JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
 
+        } else {
+
+            String nombreUsuario,
+                    direccionUsuario,
+                    correoUsuario;
+
+            int codigoUsuario,
+                    cedulaUsuario;
+
+            nombreUsuario = txtNombreLector.getText();
+            codigoUsuario = Integer.parseInt(txtCodigoLector.getText());
+            cedulaUsuario = Integer.parseInt(txtCedulaLector.getText());
+            direccionUsuario = txtDireccionLector.getText();
+            correoUsuario = txtCorreoLector.getText();
+
+            Lector lector = new Lector(nombreUsuario, direccionUsuario, correoUsuario, codigoUsuario, cedulaUsuario);
+
+            if (controlador.verificarLector(lector.getCodigo(), lector.getCedula())
+                    && controlador2.verificarBibliotecario(lector.getCodigo(), lector.getCedula())
+                    && controlador3.verificarAdministrador(lector.getCodigo(), lector.getCedula())) {
+
+                controlador.registrarLector(lector);
+                JOptionPane.showMessageDialog(null, "El lector se ha registrado ");
+                LimpiarCampos();
+                listarTablas();
             } else {
-
-                String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
-                        direccionUsuario,
-                        correoUsuario;
-
-                nombreUsuario = txtNombreLector.getText();
-                codigoUsuario = txtCodigoLector.getText();
-                cedulaUsuario = txtCedulaLector.getText();
-                direccionUsuario = txtDireccionLector.getText();
-                correoUsuario = txtCorreoLector.getText();
-
-                Lector lector = new Lector(codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
-
-                if (controlador.verificarLector(lector.getCodigo(), lector.getCedula())
-                        && controlador2.verificarBibliotecario(lector.getCodigo(), lector.getCedula())
-                        && controlador3.verificarAdministrador(lector.getCodigo(), lector.getCedula())) {
-
-                    controlador.registrarLector(lector);
-                    JOptionPane.showMessageDialog(null, "El lector se ha registrado ");
-                    LimpiarCampos();
-                    listarTablas();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al registrar el lector");
-                }
-
+                JOptionPane.showMessageDialog(null, "Error al registrar el lector");
             }
-        
+
+        }
+
     }//GEN-LAST:event_btnRegistrarLectorActionPerformed
 
     private void btnModificarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarLectorActionPerformed
         // TODO add your handling code here:
-        
-           if (txtNombreLector.getText().isEmpty()
-                    || txtCodigoLector.getText().isEmpty()
-                    || txtCedulaLector.getText().isEmpty()
-                    || txtDireccionLector.getText().isEmpty()
-                    || txtCorreoLector.getText().isEmpty()) {
 
-                JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
+        if (txtNombreLector.getText().isEmpty()
+                || txtCodigoLector.getText().isEmpty()
+                || txtCedulaLector.getText().isEmpty()
+                || txtDireccionLector.getText().isEmpty()
+                || txtCorreoLector.getText().isEmpty()) {
 
-            } else {
+            JOptionPane.showMessageDialog(null, "Llene todos los campos por favor");
 
-                String nombreUsuario,
-                        codigoUsuario,
-                        cedulaUsuario,
-                        direccionUsuario,
-                        correoUsuario;
+        } else {
 
-                nombreUsuario = txtNombreLector.getText();
-                codigoUsuario = txtCodigoLector.getText();
-                cedulaUsuario = txtCedulaLector.getText();
-                direccionUsuario = txtDireccionLector.getText();
-                correoUsuario = txtCorreoLector.getText();
+            String nombreUsuario,
+                    direccionUsuario,
+                    correoUsuario;
 
-                controlador.editarLector(codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
-                JOptionPane.showMessageDialog(null, "El usuario se ha modificado ");
-                LimpiarCampos();
-                listarTablas();
-               
-                txtCedulaLector.setEditable(true);
-                btnModificarLector.setEnabled(false);
-                btnCancelarLector.setVisible(false);
-                btnRegistrarLector.setEnabled(true);
-            }
-    
-        
+            int codigoUsuario,
+                    cedulaUsuario;
+
+            nombreUsuario = txtNombreLector.getText();
+            codigoUsuario = Integer.parseInt(txtCodigoLector.getText());
+            cedulaUsuario = Integer.parseInt(txtCedulaLector.getText());
+            direccionUsuario = txtDireccionLector.getText();
+            correoUsuario = txtCorreoLector.getText();
+
+            controlador.editarLector(codigoUsuario, cedulaUsuario, nombreUsuario, direccionUsuario, correoUsuario);
+            JOptionPane.showMessageDialog(null, "El usuario se ha modificado ");
+            LimpiarCampos();
+            listarTablas();
+
+            txtCedulaLector.setEditable(true);
+            btnModificarLector.setEnabled(false);
+            btnCancelarLector.setVisible(false);
+            btnRegistrarLector.setEnabled(true);
+        }
+
+
     }//GEN-LAST:event_btnModificarLectorActionPerformed
 
     private void btnEliminarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLectorActionPerformed
         // TODO add your handling code here:
-        
-         String cedula = JOptionPane.showInputDialog("Introduzca la cedula del usuario a eliminar");
-         
-         if (controlador.eliminarLector(cedula)) {
+
+        int cedula = Integer.parseInt(JOptionPane.showInputDialog("Introduzca la cedula del usuario a eliminar"));
+
+        if (controlador.eliminarLector(cedula)) {
             JOptionPane.showMessageDialog(null, "Eliminado Correctamente el lector",
                     "Informe", JOptionPane.INFORMATION_MESSAGE);
-         } else {
+        } else {
             JOptionPane.showMessageDialog(null, "No se ha podido eliminar");
         }
 
         listarTablas();
-        
+
     }//GEN-LAST:event_btnEliminarLectorActionPerformed
 
     private void btnBuscarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLectorActionPerformed
         // TODO add your handling code here:
-        
-         String cedula = JOptionPane.showInputDialog("Ingrese la cedula del Usuario");
-         
-          Lector lector = controlador.buscarLector(cedula);
-         
-          if (lector != null) {
+
+        int cedula = Integer.parseInt(JOptionPane.showInputDialog("Ingrese la cedula del Usuario"));
+
+        Lector lector = controlador.buscarLector(cedula);
+
+        if (lector != null) {
             txtNombreLector.setText(lector.getNombreCompleto());
-            txtCedulaLector.setText(lector.getCedula());
+            txtCedulaLector.setText(lector.getCedula() + "");
             txtCedulaLector.setEditable(false);
-            txtCodigoLector.setText(lector.getCodigo());
+            txtCodigoLector.setText(lector.getCodigo() + "");
             txtCorreoLector.setText(lector.getCorreo());
             txtDireccionLector.setText(lector.getDireccion());
             btnModificarLector.setEnabled(true);
@@ -367,19 +369,19 @@ public class FrmGestionLector extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar el usuario");
         }
-          
-          
+
+
     }//GEN-LAST:event_btnBuscarLectorActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        
-         controlador.guardarArchivoL();
+
+        controlador.guardarArchivoL();
     }//GEN-LAST:event_formWindowClosed
 
     private void txtNombreLectorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreLectorKeyTyped
         // TODO add your handling code here:
-         char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
 
         if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z')) {
             evt.consume();
@@ -393,12 +395,12 @@ public class FrmGestionLector extends javax.swing.JFrame {
         if (c < '0' || c > '9') {
             evt.consume();
         }
-        
+
     }//GEN-LAST:event_txtCodigoLectorKeyTyped
 
     private void txtCedulaLectorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaLectorKeyTyped
         // TODO add your handling code here:
-        
+
         char c = evt.getKeyChar();
 
         if (c < '0' || c > '9') {
@@ -406,7 +408,7 @@ public class FrmGestionLector extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCedulaLectorKeyTyped
 
-     public void LimpiarCampos() {
+    public void LimpiarCampos() {
 
         txtNombreLector.setText("");
         txtCodigoLector.setText("");
@@ -414,19 +416,14 @@ public class FrmGestionLector extends javax.swing.JFrame {
         txtCedulaLector.setText("");
         txtDireccionLector.setText("");
     }
-    
-        public void listarTablas() {
+
+    public void listarTablas() {
 
         DefaultTableModel modelo3;
         modelo3 = controlador.listarL();
         tblLectorBiblioteca.setModel(modelo3);
     }
-    
-    
-    
-    
-    
-    
+
     /**
      * @param args the command line arguments
      */
