@@ -54,8 +54,5 @@ public class Libro extends RecursoBibliografico{
     public void setNumeroDiasPrestado(int numeroDiasPrestado) {
         this.numeroDiasPrestado = numeroDiasPrestado;
     }
-
-
-    
   
 }

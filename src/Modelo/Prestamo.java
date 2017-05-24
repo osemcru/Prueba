@@ -70,10 +70,5 @@ public class Prestamo{
     public void setLector(Lector lector) {
         this.lector = lector;
     }
-   
-   
-    
-    
-    
     
 }
