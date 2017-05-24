@@ -439,14 +439,12 @@ public class FrmConsultaMaterialBibliografico extends javax.swing.JFrame {
 
         if (titulo.equals("") && isbnIssn == 0 && asignatura.equals("") && año == 0 && copias == 0) {
             JOptionPane.showMessageDialog(this, "Escribe algun valor en los cuadros de filtros");
-        } else if (modelo.getRowCount()==0 && modelo2.getRowCount()==0) {
+        } else if (modelo.getRowCount() == 0 && modelo2.getRowCount() == 0) {
             JOptionPane.showMessageDialog(this, "No se encontraron datos");
         } else {
             tblMaterialLibro.setModel(controlador.listarConsulta(titulo, isbnIssn, asignatura, año, copias));
             tblMaterialRevista.setModel(controlador2.listarConsulta(titulo, isbnIssn, asignatura, año, copias));
 
-            btnSolicitarPrestamo.setEnabled(true);
-            btnCancelar.setVisible(true);
         }
     }//GEN-LAST:event_btnBuscarMaterialActionPerformed
 
@@ -473,6 +471,8 @@ public class FrmConsultaMaterialBibliografico extends javax.swing.JFrame {
                 txtAsignatura.setText(libro.getAsignatura());
                 txtAño.setText(String.valueOf(libro.getAño()));
                 txtCopias.setText(String.valueOf(libro.getNumCopias()));
+                btnSolicitarPrestamo.setEnabled(true);
+                btnCancelar.setVisible(true);
             }
         }
     }//GEN-LAST:event_tblMaterialLibroMouseClicked
@@ -493,6 +493,8 @@ public class FrmConsultaMaterialBibliografico extends javax.swing.JFrame {
                 txtAsignatura.setText(revista.getAsignatura());
                 txtAño.setText(String.valueOf(revista.getAño()));
                 txtCopias.setText(String.valueOf(revista.getNumCopias()));
+                btnSolicitarPrestamo.setEnabled(true);
+                btnCancelar.setVisible(true);
             }
         }
 
