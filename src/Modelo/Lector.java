@@ -25,8 +25,5 @@ public class Lector extends Usuario{
     public void setPrestamos(Prestamo[] prestamos, int i) {
         this.prestamos[i] = prestamos[i];
     }
-    
-    
-    
-        
+     
 }
