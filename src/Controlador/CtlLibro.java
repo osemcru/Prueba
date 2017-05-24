@@ -112,7 +112,7 @@ public class CtlLibro {
                                     listaLibros.get(i).getNumCopias(),
                                     listaLibros.get(i).getNumeroPaginas()
                                 });
-                                
+
                                 consultaLibros.add(listaLibros.get(i));
                             }
                         }
@@ -161,55 +161,27 @@ public class CtlLibro {
         }
     }
 
-    public String guardarArchivoLb() {
-        FileOutputStream archivoLb;
+    public void guardarArchivoLb() {
 
         try {
-            archivoLb = new FileOutputStream("ListaLibros.txt");
-        } catch (Exception e) {
-            return "Error al crear el archivo";
-        }
-
-        ObjectOutputStream escrituraLb;
-
-        try {
-            escrituraLb = new ObjectOutputStream(archivoLb);
-        } catch (Exception i) {
-            return "Error con el archivo";
-        }
-
-        try {
+            FileOutputStream archivoLb = new FileOutputStream("ListaLibros.txt");
+            ObjectOutputStream escrituraLb = new ObjectOutputStream(archivoLb);
             escrituraLb.writeObject(listaLibros);
-            return "Se ha guardado correctamente";
-        } catch (Exception o) {
-            return "Error al almacenar el archivo";
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public String cargarArchivoLb() {
-        FileInputStream archivoLb;
-
+    public void cargarArchivoLb() {
+        
         try {
-            archivoLb = new FileInputStream("ListaLibros.txt");
-        } catch (Exception e) {
-            return "Error cargando el archivo";
-        }
-
-        ObjectInputStream lecturaLb;
-
-        try {
-            lecturaLb = new ObjectInputStream(archivoLb);
-        } catch (Exception e) {
-            return "Error con el archivo";
-        }
-
-        try {
+            FileInputStream archivoLb = new FileInputStream("ListaLibros.txt");
+            ObjectInputStream lecturaLb = new ObjectInputStream(archivoLb);
             listaLibros = (ArrayList<Libro>) lecturaLb.readObject();
         } catch (Exception e) {
-            return "Error cargando la informacion";
+            e.printStackTrace();
         }
 
-        return "Archivo cargado correctamente";
     }
 
     public Libro buscarLibroSeleccionado(int pos) {
