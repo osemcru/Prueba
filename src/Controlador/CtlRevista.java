@@ -20,9 +20,11 @@ import javax.swing.table.DefaultTableModel;
 public class CtlRevista {
 
     public ArrayList<Revista> listaRevistas;
+    public ArrayList<Revista> consultaRevistas;
 
     public CtlRevista() {
         listaRevistas = new ArrayList<>();
+        consultaRevistas = new ArrayList<>();
         cargarArchivoRv();
 
     }
@@ -87,7 +89,7 @@ public class CtlRevista {
         DefaultTableModel modelo;
         String nombreColumnas[] = {"ISSN", "Titulo", "Asignatura", "Año", "No°Copias", "Volumen"};
         modelo = new DefaultTableModel(new Object[][]{}, nombreColumnas);
-
+        consultaRevistas.clear();
         int intIndex;
         for (int i = 0; i < listaRevistas.size(); i++) {
             intIndex = listaRevistas.get(i).getTitulo().indexOf(titulo);
@@ -110,6 +112,7 @@ public class CtlRevista {
                                     listaRevistas.get(i).getVolumen()
                                 });
 
+                                consultaRevistas.add(listaRevistas.get(i));
                             }
                         }
                     }
@@ -206,7 +209,7 @@ public class CtlRevista {
     }
 
     public Revista buscarRevistaSeleccionada(int pos) {
-        return listaRevistas.get(pos);
+        return consultaRevistas.get(pos);
     }
 
     public boolean verificarRevista(int issn) {

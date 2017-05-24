@@ -20,9 +20,11 @@ import javax.swing.table.DefaultTableModel;
 public class CtlLibro {
 
     public ArrayList<Libro> listaLibros;
+    public ArrayList<Libro> consultaLibros;
 
     public CtlLibro() {
         listaLibros = new ArrayList<>();
+        consultaLibros = new ArrayList<>();
         cargarArchivoLb();
 
     }
@@ -88,6 +90,7 @@ public class CtlLibro {
         DefaultTableModel modelo;
         String nombreColumnas[] = {"ISBN", "Titulo", "Asignatura", "Año", "No°Copias", "No°Paginas"};
         modelo = new DefaultTableModel(new Object[][]{}, nombreColumnas);
+        consultaLibros.clear();
         int intIndex;
         for (int i = 0; i < listaLibros.size(); i++) {
             intIndex = listaLibros.get(i).getTitulo().indexOf(titulo);
@@ -109,7 +112,8 @@ public class CtlLibro {
                                     listaLibros.get(i).getNumCopias(),
                                     listaLibros.get(i).getNumeroPaginas()
                                 });
-
+                                
+                                consultaLibros.add(listaLibros.get(i));
                             }
                         }
                     }
@@ -209,7 +213,7 @@ public class CtlLibro {
     }
 
     public Libro buscarLibroSeleccionado(int pos) {
-        return listaLibros.get(pos);
+        return consultaLibros.get(pos);
     }
 
     public boolean verificarLibro(int isbn) {
