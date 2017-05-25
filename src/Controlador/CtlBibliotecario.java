@@ -16,7 +16,6 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Properties;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author julian
@@ -64,7 +63,6 @@ public class CtlBibliotecario {
         }
         return modelo;
     }
-
     /**
      * Busca un bibliotecario
      *
