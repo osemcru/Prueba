@@ -279,11 +279,14 @@ public class FrmGestionLector extends javax.swing.JFrame {
             if (controlador.verificarLector(lector.getCodigo(), lector.getCedula())
                     && controlador2.verificarBibliotecario(lector.getCodigo(), lector.getCedula())
                     && controlador3.verificarAdministrador(lector.getCodigo(), lector.getCedula())) {
-
-                controlador.registrarLector(lector);
-                JOptionPane.showMessageDialog(null, "El lector se ha registrado ");
-                LimpiarCampos();
-                listarTablas();
+                if (cedulaUsuario > 0) {
+                    controlador.registrarLector(lector);
+                    JOptionPane.showMessageDialog(null, "El lector se ha registrado ");
+                    LimpiarCampos();
+                    listarTablas();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Ingresa una cedula con un valor superior a 0");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Error al registrar el lector");
             }
@@ -329,7 +332,6 @@ public class FrmGestionLector extends javax.swing.JFrame {
             btnRegistrarLector.setEnabled(true);
         }
 
-
     }//GEN-LAST:event_btnModificarLectorActionPerformed
 
     private void btnEliminarLectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarLectorActionPerformed
@@ -369,7 +371,6 @@ public class FrmGestionLector extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se ha podido encontrar el usuario");
         }
-
 
     }//GEN-LAST:event_btnBuscarLectorActionPerformed
 

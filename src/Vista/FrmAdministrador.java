@@ -21,12 +21,9 @@ public class FrmAdministrador extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(this);
         controlador = new CtlAdministrador();
-        try {
-            administrador = controlador.cargarDatosAdmin();
-            lblUsuario.setText("Bienvenido! " + administrador.getNombreCompleto());
-        } catch (Exception e) {
+        administrador = controlador.cargarDatosAdmin();
+        lblUsuario.setText("Bienvenido! " + administrador.getNombreCompleto());
 
-        }
     }
 
     /**
@@ -67,6 +64,7 @@ public class FrmAdministrador extends javax.swing.JFrame {
         jLabel2.setText("Gestión de usuarios");
 
         lblUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        lblUsuario.setText("Bienvenida");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,27 +73,28 @@ public class FrmAdministrador extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(46, 46, 46))
-                            .addComponent(lblUsuario)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(94, 94, 94)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(jButton2)))
+                        .addGap(151, 151, 151)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblUsuario)))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(lblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)

@@ -9,7 +9,6 @@ import Controlador.CtlLibro;
 import Controlador.CtlRevista;
 import Modelo.Libro;
 import Modelo.Revista;
-import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

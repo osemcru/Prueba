@@ -74,9 +74,14 @@ public class CtlAdministrador {
      * @return el administrador si esta o null si no
      */
     public Administrador buscarAdministrador(int cedula) {
-        for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (listaAdministradores.get(i).getCedula() == (cedula)) {
-                return listaAdministradores.get(i);
+
+        int cedulaArbol = administradores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaAdministradores.size(); i++) {
+                if (listaAdministradores.get(i).getCedula() == cedulaArbol) {
+                    return listaAdministradores.get(i);
+                }
             }
         }
         return null;
@@ -95,6 +100,7 @@ public class CtlAdministrador {
             if (listaAdministradores.get(i).getCedula() == (cedula)) {
 
                 listaAdministradores.remove(i);
+                administradores.borrar(cedula);
                 return true;
             }
 
@@ -179,9 +185,14 @@ public class CtlAdministrador {
      * @return true si esta o false si no
      */
     public boolean comprobarCuentaA(int cedula, int codigo) {
-        for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (cedula == (listaAdministradores.get(i).getCedula()) && codigo == (listaAdministradores.get(i).getCodigo())) {
-                return true;
+
+        int cedulaArbol = administradores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaAdministradores.size(); i++) {
+                if (cedulaArbol == (listaAdministradores.get(i).getCedula()) && codigo == (listaAdministradores.get(i).getCodigo())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -196,9 +207,13 @@ public class CtlAdministrador {
      */
     public boolean verificarAdministrador(int codigo, int cedula) {
 
-        for (int i = 0; i < listaAdministradores.size(); i++) {
-            if (codigo == (listaAdministradores.get(i).getCodigo()) || cedula == (listaAdministradores.get(i).getCedula())) {
-                return false;
+        int cedulaArbol = administradores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaAdministradores.size(); i++) {
+                if (codigo == (listaAdministradores.get(i).getCodigo()) || cedulaArbol == (listaAdministradores.get(i).getCedula())) {
+                    return false;
+                }
             }
         }
         return true;

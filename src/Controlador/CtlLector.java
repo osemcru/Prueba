@@ -24,10 +24,11 @@ import javax.swing.table.DefaultTableModel;
 public class CtlLector {
 
     private ArrayList<Lector> listaLectores;
-    private int indice = 0;
+    private ArbolBinario lectores;
 
     public CtlLector() {
         listaLectores = new ArrayList<>();
+        lectores = new ArbolBinario();
         cargarArchivoL();
     }
 
@@ -38,6 +39,7 @@ public class CtlLector {
      */
     public void registrarLector(Lector lector) {
         listaLectores.add(lector);
+        lectores.agregar(lector.getCedula());
     }
 
     /**
@@ -68,9 +70,14 @@ public class CtlLector {
      * @return el lector si esta o null si no
      */
     public Lector buscarLector(int cedula) {
-        for (int i = 0; i < listaLectores.size(); i++) {
-            if (listaLectores.get(i).getCedula() == (cedula)) {
-                return listaLectores.get(i);
+
+        int cedulaArbol = lectores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaLectores.size(); i++) {
+                if (listaLectores.get(i).getCedula() == cedulaArbol) {
+                    return listaLectores.get(i);
+                }
             }
         }
         return null;
@@ -89,6 +96,7 @@ public class CtlLector {
             if (listaLectores.get(i).getCedula() == (cedula)) {
 
                 listaLectores.remove(i);
+                lectores.borrar(cedula);
                 return true;
             }
 
@@ -139,6 +147,12 @@ public class CtlLector {
             FileInputStream archivoLec = new FileInputStream("ListaLectores.txt");
             ObjectInputStream lecturaLec = new ObjectInputStream(archivoLec);
             listaLectores = (ArrayList<Lector>) lecturaLec.readObject();
+
+            if (lectores.getRaiz() == null) {
+                for (int i = 0; i < listaLectores.size(); i++) {
+                    lectores.agregar(listaLectores.get(i).getCedula());
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -151,7 +165,6 @@ public class CtlLector {
      * @return el lector en la posicion de la lista
      */
     public Lector buscarlectorSeleccionado(int pos) {
-        indice = pos;
         return listaLectores.get(pos);
     }
 
@@ -163,9 +176,14 @@ public class CtlLector {
      * @return true si esta o false si no
      */
     public boolean comprobarCuentaL(int cedula, int codigo) {
-        for (int i = 0; i < listaLectores.size(); i++) {
-            if (cedula == (listaLectores.get(i).getCedula()) && codigo == (listaLectores.get(i).getCodigo())) {
-                return true;
+
+        int cedulaArbol = lectores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaLectores.size(); i++) {
+                if (cedulaArbol == (listaLectores.get(i).getCedula()) && codigo == (listaLectores.get(i).getCodigo())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -180,9 +198,13 @@ public class CtlLector {
      */
     public boolean verificarLector(int codigo, int cedula) {
 
-        for (int i = 0; i < listaLectores.size(); i++) {
-            if (codigo == (listaLectores.get(i).getCodigo()) || cedula == (listaLectores.get(i).getCedula())) {
-                return false;
+        int cedulaArbol = lectores.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaLectores.size(); i++) {
+                if (codigo == (listaLectores.get(i).getCodigo()) || cedulaArbol == (listaLectores.get(i).getCedula())) {
+                    return false;
+                }
             }
         }
         return true;

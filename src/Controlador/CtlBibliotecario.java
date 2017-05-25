@@ -24,10 +24,11 @@ import javax.swing.table.DefaultTableModel;
 public class CtlBibliotecario {
 
     private ArrayList<Bibliotecario> listaBibliotecarios;
-    private int indice = 0;
+    private ArbolBinario bibliotecarios;
 
     public CtlBibliotecario() {
         listaBibliotecarios = new ArrayList<>();
+        bibliotecarios = new ArbolBinario();
         cargarArchivoB();
     }
 
@@ -38,6 +39,7 @@ public class CtlBibliotecario {
      */
     public void registrarBibliotecario(Bibliotecario bibliotecario) {
         listaBibliotecarios.add(bibliotecario);
+        bibliotecarios.agregar(bibliotecario.getCedula());
     }
 
     /**
@@ -70,9 +72,14 @@ public class CtlBibliotecario {
      * @return el bibliotecario si esta o null si no
      */
     public Bibliotecario buscarBibliotecario(int cedula) {
-        for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (listaBibliotecarios.get(i).getCedula() == (cedula)) {
-                return listaBibliotecarios.get(i);
+
+        int cedulaArbol = bibliotecarios.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaBibliotecarios.size(); i++) {
+                if (listaBibliotecarios.get(i).getCedula() == cedulaArbol) {
+                    return listaBibliotecarios.get(i);
+                }
             }
         }
         return null;
@@ -91,6 +98,7 @@ public class CtlBibliotecario {
             if (listaBibliotecarios.get(i).getCedula() == (cedula)) {
 
                 listaBibliotecarios.remove(i);
+                bibliotecarios.borrar(cedula);
                 return true;
             }
 
@@ -143,6 +151,12 @@ public class CtlBibliotecario {
             FileInputStream archivoBib = new FileInputStream("ListaBibliotecarios.txt");
             ObjectInputStream lecturaBib = new ObjectInputStream(archivoBib);
             listaBibliotecarios = (ArrayList<Bibliotecario>) lecturaBib.readObject();
+
+            if (bibliotecarios.getRaiz() == null) {
+                for (int i = 0; i < listaBibliotecarios.size(); i++) {
+                    bibliotecarios.agregar(listaBibliotecarios.get(i).getCedula());
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,7 +170,6 @@ public class CtlBibliotecario {
      * @return el bibliotecario en la posicion de la lista
      */
     public Bibliotecario buscarBibliotecarioSeleccionado(int pos) {
-        indice = pos;
         return listaBibliotecarios.get(pos);
     }
 
@@ -169,9 +182,13 @@ public class CtlBibliotecario {
      */
     public boolean comprobarCuentaB(int cedula, int codigo) {
 
-        for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (cedula == (listaBibliotecarios.get(i).getCedula()) && codigo == (listaBibliotecarios.get(i).getCodigo())) {
-                return true;
+        int cedulaArbol = bibliotecarios.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaBibliotecarios.size(); i++) {
+                if (cedulaArbol == (listaBibliotecarios.get(i).getCedula()) && codigo == (listaBibliotecarios.get(i).getCodigo())) {
+                    return true;
+                }
             }
         }
         return false;
@@ -186,9 +203,13 @@ public class CtlBibliotecario {
      */
     public boolean verificarBibliotecario(int codigo, int cedula) {
 
-        for (int i = 0; i < listaBibliotecarios.size(); i++) {
-            if (codigo == (listaBibliotecarios.get(i).getCodigo()) || cedula == (listaBibliotecarios.get(i).getCedula())) {
-                return false;
+        int cedulaArbol = bibliotecarios.buscar(cedula);
+
+        if (cedulaArbol > 0) {
+            for (int i = 0; i < listaBibliotecarios.size(); i++) {
+                if (codigo == (listaBibliotecarios.get(i).getCodigo()) || cedulaArbol == (listaBibliotecarios.get(i).getCedula())) {
+                    return false;
+                }
             }
         }
         return true;

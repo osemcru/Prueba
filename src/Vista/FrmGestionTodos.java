@@ -527,12 +527,14 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                 if (controlador.verificarAdministrador(administrador.getCodigo(), administrador.getCedula())
                         && controlador2.verificarBibliotecario(administrador.getCodigo(), administrador.getCedula())
                         && controlador3.verificarLector(administrador.getCodigo(), administrador.getCedula())) {
-
-                    controlador.registrarAdministrador(administrador);
-                    JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
-                    LimpiarCampos();
-                    listarTablas();
-
+                    if (cedulaUsuario > 0) {
+                        controlador.registrarAdministrador(administrador);
+                        JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
+                        LimpiarCampos();
+                        listarTablas();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingresa una cedula con un valor superior a 0");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Ya hay un usuario con esa cedula y/o codigo");
 
@@ -577,17 +579,19 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                         break;
                 }
 
-                Bibliotecario bibliotecario = new Bibliotecario(turnoAtencion, nombreUsuario, turnoAtencion, correoUsuario, codigoUsuario, cedulaUsuario);
+                Bibliotecario bibliotecario = new Bibliotecario(turnoAtencion, nombreUsuario, direccionUsuario, correoUsuario, codigoUsuario, cedulaUsuario);
 
                 if (controlador.verificarAdministrador(bibliotecario.getCodigo(), bibliotecario.getCedula())
                         && controlador2.verificarBibliotecario(bibliotecario.getCodigo(), bibliotecario.getCedula())
                         && controlador3.verificarLector(bibliotecario.getCodigo(), bibliotecario.getCedula())) {
-
-                    controlador2.registrarBibliotecario(bibliotecario);
-                    JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
-                    LimpiarCampos();
-                    listarTablas();
-
+                    if (cedulaUsuario > 0) {
+                        controlador2.registrarBibliotecario(bibliotecario);
+                        JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
+                        LimpiarCampos();
+                        listarTablas();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingresa una cedula con un valor superior a 0");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Ya hay un usuario con esa cedula y/o codigo");
 
@@ -623,11 +627,14 @@ public class FrmGestionTodos extends javax.swing.JFrame {
                 if (controlador.verificarAdministrador(lector.getCodigo(), lector.getCedula())
                         && controlador2.verificarBibliotecario(lector.getCodigo(), lector.getCedula())
                         && controlador3.verificarLector(lector.getCodigo(), lector.getCedula())) {
-
-                    controlador3.registrarLector(lector);
-                    JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
-                    LimpiarCampos();
-                    listarTablas();
+                    if (cedulaUsuario > 0) {
+                        controlador3.registrarLector(lector);
+                        JOptionPane.showMessageDialog(null, "El usuario se ha registrado ");
+                        LimpiarCampos();
+                        listarTablas();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingresa una cedula con un valor superior a 0");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(null, "Error al registrar el usuario");
                 }
@@ -825,6 +832,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             txtCodigoUsuario.setText(bibliotecario.getCodigo() + "");
             txtCorreoUsuario.setText(bibliotecario.getCorreo());
             txtDireccionUsuario.setText(bibliotecario.getDireccion());
+
             if (bibliotecario.getTurnoAtencion().equals("Mañana")) {
                 cbTurno.setSelectedIndex(1);
             } else if (bibliotecario.getTurnoAtencion().equals("Tarde")) {
@@ -832,6 +840,7 @@ public class FrmGestionTodos extends javax.swing.JFrame {
             } else {
                 cbTurno.setSelectedIndex(3);
             }
+
             btnModificarUsuario.setEnabled(true);
             btnCancelarUsuario.setVisible(true);
             btnRegistrarUsuario.setEnabled(false);
